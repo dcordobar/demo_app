@@ -1,0 +1,15 @@
+
+<% unless @cart.line_items.empty? %>
+<h2>Your Cart</h2>
+
+<h4>Hay <%= pluralize(session[:counter],"line") %> en el carro</h4>
+<table>
+	<%= render(@cart.line_items) %>
+	<tr>
+		<td><%= number_to_currency(@cart.total_price) %></td>
+</table>
+
+<%= button_to "Checkout", new_order_path, :method => :get %>
+<%= button_to 'Empty cart', @cart, :method => :delete,
+		:confirm => 'Are you sure?' %>
+<% end %>

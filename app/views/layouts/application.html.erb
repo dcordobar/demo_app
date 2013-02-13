@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DemoApp</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <title>Tienda DemoApp</title>
+  <%= stylesheet_link_tag    "scaffold" %>
+  <%= stylesheet_link_tag    "demoapp", :media => "all"  %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="store">
+	<div id="banner">
+		<% image_tag("logo.png") %>
+		<%= @page_title || "Tienda" %>
+	</div>
+	<div id="columns">
+		<div id="side">
+			<% if @cart %>
+				<%= hidden_div_if(@cart.line_items.empty?, :id => "cart") do %>
+					<%= render @cart %>
+				<% end %>
+			<% end %>
+			<a href="www.google.es">Google</a>
 
-<%= yield %>
+			<% if session[:user_id] %> <br/>
+				<%= link_to 'Orders', orders_path %><br />
+			  <%=	link_to 'Products', products_path %><br />
+				<%= link_to 'Users', users_path %><br />
+				<br/>
+				<%= button_to 'Logout', logout_path, :method => :delete %>
+			<% end %>
 
+		</div>
+		<div id="main">
+			<%= yield %>
+		</div>
+	</div>
 </body>
 </html>
