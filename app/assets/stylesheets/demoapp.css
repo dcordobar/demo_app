@@ -119,6 +119,7 @@
   font: small-caps 40px/40px "Times New Roman", serif;
   color: white;
   text-align: center;
+  height:80px;
 }
 #banner img {
   float: left;
